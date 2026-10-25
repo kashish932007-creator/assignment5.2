@@ -1,0 +1,139 @@
+File 1: index.html
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 5.2 - CSS Selectors Practice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Specific section styled using ID selector -->
+  <header id="main-header">
+    <h1>CSS Selectors Practice</h1>
+    <p>Demonstrating element, class, ID, universal, grouping, and cascade rules.</p>
+  </header>
+
+  <main>
+    <section class="card-container">
+      <!-- Multiple cards styled using class selector -->
+      <article class="card">
+        <h2>Card Title One</h2>
+        <p>This paragraph is styled inside a card layout using class selectors.</p>
+      </article>
+
+      <article class="card">
+        <h2>Card Title Two</h2>
+        <p>This paragraph shares identical class styling with the other card.</p>
+      </article>
+    </section>
+
+    <footer id="footer-section">
+      <!-- Conflicting rules demonstration -->
+      <p class="highlight-text" id="special-text">
+        This text demonstrates CSS Specificity and Cascade.
+      </p>
+    </footer>
+  </main>
+
+</body>
+</html>
+File 2: style.css
+CSS
+/* 1. Universal Selector: Resets default margin, padding, and box-sizing for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Grouping Selector: Applies base typography across headings and paragraphs */
+h1, h2, p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* 3. Element Selector: Styles generic body and paragraph tags */
+body {
+  background-color: #f4f6f8;
+  color: #333333;
+  padding: 20px;
+}
+
+p {
+  color: #555555;
+}
+
+/* 4. ID Selector: Styles the main header section uniquely */
+#main-header {
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#main-header h1 {
+  color: #f8fafc;
+  margin-bottom: 8px;
+}
+
+/* 5. Class Selector: Styles multiple cards consistently */
+.card-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+/* 6. Conflicting CSS Rules (Demonstrating Cascade and Specificity) */
+
+/* Rule A: Class selector targeting the footer text */
+.highlight-text {
+  color: blue;
+  font-weight: bold;
+}
+
+/* Rule B: ID selector targeting the same exact element */
+#special-text {
+  color: crimson;
+}
+Explanation of Selectors Used
+Universal Selector (*):
+Targeted every single element on the page to clear out default browser margins and paddings, establishing a consistent box-sizing: border-box layout baseline.
+
+Element Selector (body, p):
+Targeted HTML tags directly by name. Applied global background color and base text styles to body and paragraphs.
+
+Grouping Selector (h1, h2, p):
+Combined multiple selectors separated by commas to apply shared font family and line-height properties without duplicating code.
+
+Class Selector (.card, .card-container):
+Targeted elements assigned class="card". Allowed reusable card container layout and styling across multiple <article> elements.
+
+ID Selector (#main-header):
+Targeted the single element with id="main-header". Applied high-priority unique styling (dark background, padding, centered text) specific to the header banner.
+
+Conflicting Rules & Specificity Observation:
+
+Conflict: Both .highlight-text (Class) and #special-text (ID) target the exact same paragraph element in the footer with different text colors (blue vs. crimson).
+
+Observation: The text renders in crimson.
+
+Reasoning: An ID selector (#special-text) has a higher specificity weight (0, 1, 0, 0) compared to a class selector (0, 0, 1, 0) or element selector. Therefore, the ID rule overrides the class rule regardless of order in the CSS stylesheet.
